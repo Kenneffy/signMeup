@@ -4,7 +4,12 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.14.0"
+    "bootstrap": "^3.3.6",
+    "express": "^4.14.0",
+    "firebase": "^3.0.5",
+    "mongojs": "^2.4.0",
+    "nodemailer": "^2.4.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {},
   "scripts": {
