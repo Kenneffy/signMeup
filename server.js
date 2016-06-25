@@ -2,8 +2,19 @@ var express = require('express');
 var app = express();
 var nodemailer = require('nodemailer');
 var path = require('path');
+var bodyParser = require('body-parser');
+var logger = require('morgan');
 var mongoose = require('mongoose');
 var Employer = require('./registrant.js');
+var Mailer = require('./mailer.js');
+
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 mongoose.connect('mongodb://localhost/signmeup');
 
@@ -17,9 +28,7 @@ db.once('open', function(){
 	console.log('Mongoose connection successful');
 });
 
-// app.use(express.static('public'));
 
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(3000);
 
@@ -42,6 +51,36 @@ app.post('/submit', function(req, res) {
 	    res.send(doc);
 	  }
 	});
+
+	var transporter = nodemailer.createTransport({
+	    service: 'Yahoo',
+	    auth: {
+	        user: 'kenneth_yee2@yahoo.com', 
+	        pass: ''
+	    }
+	});
+
+	var mailOptions = {
+	    from: '"Kenneth Yee 👥" <kenneth_yee2@yahoo.com>', 
+	    to: 'kyee@ccpd.rutgers.edu',
+	    subject: 'Hello ✔', 
+	    text: 'Hello world 🐴', 
+	    html: '<b>Hello world 🐴</b>' 
+	};
+
+	function transport(){
+	    transporter.sendMail(mailOptions, function(error, info){
+	        if(error){
+	            return console.log(error);
+	        }
+	        console.log('Message sent: ' + info.response);
+	    });
+	}
+
+	transport();
+
 })
+
+
 
 

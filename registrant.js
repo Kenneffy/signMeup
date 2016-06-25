@@ -14,9 +14,9 @@ var RegistrantSchema = new Schema({
 	  	trim: true,
 	  	required: "Last Name is Required"
 	},
-	email: {
+	emailaddress: {
 	  	type: String,
-	  	unique:true,
+	  	unique: true,
 	  	required: "Email is Required",
 	  	match: [/.+\@.+\..+/, "Please enter a valid e-mail address"]
 	},
@@ -24,7 +24,7 @@ var RegistrantSchema = new Schema({
 		type: Date,
 		default: Date.now
 	}
-})
+});
 
 // create the "Registrant" model with our UserSchema schema
 var Registrant = mongoose.model('Registrant', RegistrantSchema);
