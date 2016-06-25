@@ -2,41 +2,46 @@ var express = require('express');
 var app = express();
 var nodemailer = require('nodemailer');
 var path = require('path');
+var mongoose = require('mongoose');
+var Employer = require('./registrant.js');
 
+mongoose.connect('mongodb://localhost/signmeup');
 
+var db = mongoose.connection;
+
+db.on('error', function(err){
+	console.log('Mongoose error: ', err);
+});
+
+db.once('open', function(){
+	console.log('Mongoose connection successful');
+});
+
+// app.use(express.static('public'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(3000);
 
-
-//export mail logic 
-var transporter = nodemailer.createTransport({
-    service: 'Yahoo',
-    auth: {
-        user: 'kenneth_yee2@yahoo.com', 
-        pass: ''
-    }
-});
-
-var mailOptions = {
-    from: '"Kenneth Yee 👥" <kenneth_yee2@yahoo.com>', 
-    to: 'kyee@ccpd.rutgers.edu',
-    subject: 'Hello ✔', 
-    text: 'Hello world 🐴', 
-    html: '<b>Hello world 🐴</b>' 
-};
-
-function transport(){
-	transporter.sendMail(mailOptions, function(error, info){
-	    if(error){
-	        return console.log(error);
-	    }
-	    console.log('Message sent: ' + info.response);
-	});
-}
+//****Need to import mailer logic**** 
 
 app.get('/', function(req, res){
-	res.sendFile(path.join(__dirname+'/views/index.html'));
+	res.send(index.html);
 })
 
+app.post('/submit', function(req, res) {
+	var registrant = new Employer(req.body);
+
+	registrant.save(function(err, doc) {
+	  // send any errors to the browser
+	  if (err) {
+	    res.send(err);
+	  } 
+	  // otherwise, send the new doc to the browser
+	  else {
+	    res.send(doc);
+	  }
+	});
+})
 
 
