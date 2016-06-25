@@ -62,7 +62,7 @@ app.post('/submit', function(req, res) {
 
 	var mailOptions = {
 	    from: '"Kenneth Yee 👥" <kenneth_yee2@yahoo.com>', 
-	    to: 'kyee@ccpd.rutgers.edu',
+	    to: req.body.emailaddress,
 	    subject: 'Hello ✔', 
 	    text: 'Hello world 🐴', 
 	    html: '<b>Hello world 🐴</b>' 
