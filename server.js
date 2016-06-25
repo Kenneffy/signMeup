@@ -7,6 +7,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var Employer = require('./registrant.js');
 var Mailer = require('./mailer.js');
+var Authpass = require('./keys.js');
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
@@ -54,10 +55,7 @@ app.post('/submit', function(req, res) {
 
 	var transporter = nodemailer.createTransport({
 	    service: 'Yahoo',
-	    auth: {
-	        user: 'kenneth_yee2@yahoo.com', 
-	        pass: ''
-	    }
+	    auth: Authpass
 	});
 
 	var mailOptions = {
