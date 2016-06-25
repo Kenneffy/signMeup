@@ -8,6 +8,10 @@ var mongoose = require('mongoose');
 var Employer = require('./registrant.js');
 var Mailer = require('./mailer.js');
 var Authpass = require('./keys.js');
+var exphbs = require('express-handlebars');
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
@@ -36,7 +40,7 @@ app.listen(3000);
 //****Need to import mailer logic**** 
 
 app.get('/', function(req, res){
-	res.send(index.html);
+	res.render('index');
 })
 
 app.post('/submit', function(req, res) {
@@ -49,7 +53,8 @@ app.post('/submit', function(req, res) {
 	  } 
 	  // otherwise, send the new doc to the browser
 	  else {
-	    res.send(doc);
+	    // res.send(doc);
+	    res.render('confirmation');
 	  }
 	});
 
@@ -76,6 +81,8 @@ app.post('/submit', function(req, res) {
 	}
 
 	transport();
+
+
 
 })
 
