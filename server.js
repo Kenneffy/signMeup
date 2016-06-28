@@ -10,6 +10,7 @@ var Mailer = require('./mailer.js');
 var Authpass = require('./keys.js');
 var exphbs = require('express-handlebars');
 
+
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
@@ -19,6 +20,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
 
 
 mongoose.connect('mongodb://localhost/signmeup');
@@ -40,7 +45,8 @@ app.listen(3000);
 //****Need to import mailer logic**** 
 
 app.get('/', function(req, res){
-	res.render('index');
+	// res.render('index');
+	res.sendFile(path.join(__dirname + '/public/home.html'));
 })
 
 app.post('/submit', function(req, res) {
