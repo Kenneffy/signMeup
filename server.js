@@ -54,7 +54,8 @@ app.post('/submit', function(req, res) {
 	  // otherwise, send the new doc to the browser
 	  else {
 	    // res.send(doc);
-	    res.render('confirmation');
+	    // res.render('confirmation');
+	    res.redirect('/');
 	  }
 	});
 
@@ -83,8 +84,7 @@ app.post('/submit', function(req, res) {
 	transport();
 
 
-
-})
+});
 
 
 
