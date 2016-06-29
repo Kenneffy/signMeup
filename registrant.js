@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+require('mongoose-setter')(mongoose);
 
 // Schema Class
 var Schema = mongoose.Schema;
@@ -25,6 +26,14 @@ var RegistrantSchema = new Schema({
 		default: Date.now
 	}
 });
+
+RegistrantSchema.path('firstname')
+	.trim()
+	.capitalize()
+
+RegistrantSchema.path('lastname')
+	.trim()
+	.capitalize()	
 
 // create the "Registrant" model with our UserSchema schema
 var Registrant = mongoose.model('Registrant', RegistrantSchema);

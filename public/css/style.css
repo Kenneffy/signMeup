@@ -1,0 +1,36 @@
+body{
+	background-image: url('/assets/images/pink_rice.png');
+}
+::-webkit-input-placeholder {
+	font-weight: bold;
+	font-size: 1.5em;
+	text-align: center;
+	color: #0C86F3;
+}
+:-moz-placeholder {
+	font-weight: bold;
+	font-size: 1.5em;
+	text-align: center;
+	color: #0C86F3;
+}
+button {
+	position: relative;
+	left: 25%;
+	width: 50%;
+}
+
+.form-control {
+	height: 3.5em;
+	font-size: 2.5em;
+
+}
+
+.jumbotron {
+	/*min-height: 1700px;*/
+	min-height: 6.5em;
+	opacity: 0.6;
+}
+
+input[type=text] {
+    text-transform: capitalize;
+}
